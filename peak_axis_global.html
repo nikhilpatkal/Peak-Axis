@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak Axis Global | Digital Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Configuring Tailwind Theme Customizations -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#0f3a68', // Deep Navy Blue
+                            lightBlue: '#1e6bc4',
+                            gold: '#d4af37', // Professional Gold
+                            dark: '#111827',
+                            light: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0f3a68; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1e6bc4; }
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .gradient-text { background: linear-gradient(to right, #0f3a68, #1e6bc4); -webkit-background-clip: text; color: transparent; }
+        .gold-gradient-text { background: linear-gradient(to right, #d4af37, #f3e5ab); -webkit-background-clip: text; color: transparent; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+
+    <!-- 1) Top Announcement Bar -->
+    <div id="announcement-bar" class="bg-brand-blue text-white text-sm py-2 px-4 flex justify-between items-center transition-all duration-300 relative z-50">
+        <div class="flex-1 text-center sm:text-left flex items-center justify-center sm:justify-start gap-2">
+            <span class="animate-pulse text-brand-gold"><i class="fas fa-bell"></i></span>
+            <span>New Career Opportunities Available - Register Today!</span>
+        </div>
+        <a href="#registration" class="hidden sm:inline-block bg-brand-gold text-brand-dark px-3 py-1 rounded-full text-xs font-bold hover:bg-yellow-400 transition-colors">
+            View Opportunities &rarr;
+        </a>
+        <button onclick="document.getElementById('announcement-bar').style.display='none'" class="ml-4 text-white hover:text-gray-300 focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- 2) Header/Navigation -->
+    <header class="glass-effect sticky top-0 z-40 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- CSS interpretation of the requested logo -->
+                    <div class="flex items-center gap-2">
+                        <div class="relative w-12 h-12 flex items-center justify-center rounded-full border-2 border-brand-blue border-r-brand-gold">
+                            <span class="text-2xl font-bold text-brand-blue italic">R</span>
+                            <i class="fas fa-star absolute top-0 right-0 text-brand-gold text-xs -mt-1 -mr-1"></i>
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-xl font-extrabold text-brand-blue tracking-wide">PEAK AXIS</span>
+                            <span class="text-[10px] text-gray-500 font-semibold tracking-widest">GLOBAL SOLUTIONS PVT LTD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-brand-blue font-semibold hover:text-brand-lightBlue transition-colors">Home</a>
+                    <a href="#about" class="text-gray-600 font-medium hover:text-brand-lightBlue transition-colors">About Us</a>
+                    <a href="#training" class="text-gray-600 font-medium hover:text-brand-lightBlue transition-colors">Training</a>
+                    <a href="#services" class="text-gray-600 font-medium hover:text-brand-lightBlue transition-colors">Services</a>
+                    <a href="#opportunities" class="text-gray-600 font-medium hover:text-brand-lightBlue transition-colors">Opportunities</a>
+                    <a href="#contact" class="text-gray-600 font-medium hover:text-brand-lightBlue transition-colors">Contact Us</a>
+                    <a href="#registration" class="bg-brand-blue text-white px-5 py-2.5 rounded-lg font-medium hover:bg-brand-lightBlue transition-colors shadow-md">Candidate Register</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-blue focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 text-base font-medium text-brand-blue bg-blue-50 rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 rounded-md">About Us</a>
+                <a href="#training" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 rounded-md">Training</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 rounded-md">Services</a>
+                <a href="#opportunities" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 rounded-md">Opportunities</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 rounded-md">Contact Us</a>
+                <a href="#registration" class="block px-3 py-2 mt-4 text-base font-medium text-center text-white bg-brand-blue rounded-md">Candidate Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Professionals networking" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col justify-center min-h-[80vh]">
+            <div class="md:w-2/3">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30 font-semibold text-sm mb-6">
+                    Connecting Talent with the Right Opportunities
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Empowering People. <br>
+                    <span class="gold-gradient-text">Creating Opportunities.</span><br>
+                    Building Successful Careers.
+                </h1>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl leading-relaxed">
+                    A professional platform focused on career opportunities, recruitment support, consultancy, training, and industry connections.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#opportunities" class="flex justify-center items-center px-8 py-3.5 border border-transparent text-base font-bold rounded-lg text-brand-dark bg-brand-gold hover:bg-yellow-400 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Find Opportunities
+                    </a>
+                    <a href="#training" class="flex justify-center items-center px-8 py-3.5 border border-gray-400 text-base font-bold rounded-lg text-white hover:bg-white/10 transition-all">
+                        Explore Training
+                    </a>
+                    <a href="#contact" class="flex justify-center items-center px-8 py-3.5 border border-brand-blue text-base font-bold rounded-lg text-white bg-brand-blue/30 hover:bg-brand-blue transition-all backdrop-blur-sm">
+                        Hire Talent
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 2 - ABOUT US -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-brand-blue mb-4">Who We Are</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We aim to create a strong connection between students, professionals, and organizations by understanding requirements and helping them move toward suitable opportunities.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="space-y-6">
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        For us, career development is not only about finding a job. It is about helping individuals understand their potential, develop the right skills, improve their professional confidence, and progress toward a successful career.
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-brand-blue">
+                        <p class="text-brand-blue font-semibold italic text-lg">
+                            "The success of our candidates and partners is an important part of our own success."
+                        </p>
+                    </div>
+                    
+                    <h3 class="font-bold text-gray-800 text-xl pt-4">Our Target Audience</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Students & Freshers</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Experienced Professionals</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Career Switchers</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Recruiters & Employers</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Pharma & Healthcare Orgs</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team meeting" class="rounded-2xl shadow-2xl relative z-10">
+                    <div class="absolute inset-0 bg-brand-blue transform translate-x-4 translate-y-4 rounded-2xl z-0 opacity-20"></div>
+                </div>
+            </div>
+
+            <!-- Vision & Mission Cards -->
+            <div class="grid md:grid-cols-2 gap-8 mb-20">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:border-brand-blue/30 transition-all group">
+                    <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Our Vision</h3>
+                    <p class="text-brand-gold font-medium mb-4">Empowering People. Creating Opportunities.</p>
+                    <p class="text-gray-600 mb-4">
+                        To become a trusted career and professional development partner for students, professionals, and organizations. We envision an ecosystem where individual, organizational, and community growth happen together.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> The right guidance & skills</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> The right opportunity & environment</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:border-brand-blue/30 transition-all group">
+                    <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Our Mission</h3>
+                    <p class="text-brand-gold font-medium mb-4">Connecting Talent with the Right Opportunities.</p>
+                    <p class="text-gray-600 mb-4">
+                        To help students and professionals move closer to their career goals by providing opportunities, guidance, skill development, consultancy, and professional connections.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Match candidates with opportunities</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> Promote continuous, industry-focused learning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Our Approach (Stepper) -->
+            <div class="bg-slate-50 p-10 rounded-3xl border border-gray-200">
+                <h3 class="text-2xl font-bold text-center text-brand-blue mb-10">Our 5-Step Approach</h3>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center relative">
+                    <!-- Connecting Line (Desktop) -->
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-300 -translate-y-1/2 z-0"></div>
+                    
+                    <!-- Steps -->
+                    <div class="relative z-10 flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5 group">
+                        <div class="w-16 h-16 rounded-full bg-white border-4 border-brand-blue flex items-center justify-center text-brand-blue font-bold text-xl mb-4 shadow-md group-hover:bg-brand-blue group-hover:text-white transition-colors">1</div>
+                        <h4 class="font-bold text-gray-900">Connect</h4>
+                        <p class="text-xs text-center text-gray-500 mt-2 px-2">Linking people & resources.</p>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5 group">
+                        <div class="w-16 h-16 rounded-full bg-white border-4 border-brand-blue flex items-center justify-center text-brand-blue font-bold text-xl mb-4 shadow-md group-hover:bg-brand-blue group-hover:text-white transition-colors">2</div>
+                        <h4 class="font-bold text-gray-900">Understand</h4>
+                        <p class="text-xs text-center text-gray-500 mt-2 px-2">Analyzing goals & skills.</p>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5 group">
+                        <div class="w-16 h-16 rounded-full bg-white border-4 border-brand-blue flex items-center justify-center text-brand-blue font-bold text-xl mb-4 shadow-md group-hover:bg-brand-blue group-hover:text-white transition-colors">3</div>
+                        <h4 class="font-bold text-gray-900">Develop</h4>
+                        <p class="text-xs text-center text-gray-500 mt-2 px-2">Continuous learning & training.</p>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5 group">
+                        <div class="w-16 h-16 rounded-full bg-white border-4 border-brand-blue flex items-center justify-center text-brand-blue font-bold text-xl mb-4 shadow-md group-hover:bg-brand-blue group-hover:text-white transition-colors">4</div>
+                        <h4 class="font-bold text-gray-900">Opportunity</h4>
+                        <p class="text-xs text-center text-gray-500 mt-2 px-2">Matching talent with orgs.</p>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center w-full md:w-1/5 group">
+                        <div class="w-16 h-16 rounded-full bg-brand-gold border-4 border-white flex items-center justify-center text-brand-dark font-bold text-xl mb-4 shadow-md scale-110">5</div>
+                        <h4 class="font-bold text-brand-gold">Grow</h4>
+                        <p class="text-xs text-center text-gray-500 mt-2 px-2">Long-term successful careers.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STEP 3 - TRAINING & CERTIFICATION -->
+    <section id="training" class="py-20 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold font-bold tracking-wider uppercase text-sm">Step Up Your Career</span>
+                <h2 class="text-3xl font-extrabold text-brand-dark mt-2 mb-4">Global Certification Programs</h2>
+                <div class="w-24 h-1 bg-brand-blue mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Industry-aligned training programs designed to bridge the gap between academic education and corporate requirements.</p>
+            </div>
+
+            <!-- Course Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course 1 -->
+                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 overflow-hidden flex flex-col h-full">
+                    <div class="bg-brand-blue p-6 text-white relative">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-bl-lg">₹25,000</div>
+                        <h3 class="text-xl font-bold leading-tight mb-2 pr-10">Global PG Diploma in Clinical Research</h3>
+                        <p class="text-blue-200 text-sm">(All-in-One)</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>Clinical Trial Management (CTM)</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>Clinical Data Management (CDM)</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>Pharmacovigilance (PV)</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>Medical Writing</li>
+                            <li><i class="fas fa-plus text-gray-400 mr-2 ml-1"></i>And more...</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <button onclick="openModal('modal-course-1')" class="w-full bg-blue-50 text-brand-blue font-semibold py-2 rounded-lg hover:bg-brand-blue hover:text-white transition-colors border border-brand-blue/20">View Full Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 overflow-hidden flex flex-col h-full">
+                    <div class="bg-brand-blue p-6 text-white relative">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-bl-lg">₹8,000</div>
+                        <h3 class="text-xl font-bold leading-tight mb-2 pr-10">Adv. Pharmacovigilance (PV)</h3>
+                        <p class="text-blue-200 text-sm">Global Certification Program</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>ADR Reporting & Case Processing</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>MedDRA Coding & Argus Safety</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>SAE & SUSAR Reporting</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>AI in Pharmacovigilance</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <button onclick="openModal('modal-course-2')" class="w-full bg-blue-50 text-brand-blue font-semibold py-2 rounded-lg hover:bg-brand-blue hover:text-white transition-colors border border-brand-blue/20">View Full Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 overflow-hidden flex flex-col h-full">
+                    <div class="bg-brand-blue p-6 text-white relative">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-bl-lg">₹10,000</div>
+                        <h3 class="text-xl font-bold leading-tight mb-2 pr-10">Adv. Drug Regulatory Affairs</h3>
+                        <p class="text-blue-200 text-sm">Global Certification Program</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>FDA/EMA/CDSCO Guidelines</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>CTD & eCTD Submission</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>Product Registration & Labeling</li>
+                            <li><i class="fas fa-check-circle text-brand-lightBlue mr-2"></i>GMP/GLP/GCP Compliance</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <button onclick="openModal('modal-course-3')" class="w-full bg-blue-50 text-brand-blue font-semibold py-2 rounded-lg hover:bg-brand-blue hover:text-white transition-colors border border-brand-blue/20">View Full Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course 4: AI in Pharma -->
+                <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-gray-100 overflow-hidden flex flex-col h-full">
+                    <div class="bg-gradient-to-r from-purple-800 to-indigo-900 p-6 text-white relative">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-bl-lg">₹12,000</div>
+                        <i class="fas fa-robot absolute bottom-4 right-4 text-4xl opacity-20"></i>
+                        <h3 class="text-xl font-bold leading-tight mb-2 pr-10">AI in Pharma & Healthcare</h3>
+                        <p class="text-blue-200 text-sm">Global Certification Program</p>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                            <li><i class="fas fa-check-circle text-purple-600 mr-2"></i>AI in Drug Discovery & PV</li>
+                            <li><i class="fas fa-check-circle text-purple-600 mr-2"></i>AI in Healthcare Analytics</li>
+                            <li><i class="fas fa-check-circle text-purple-600 mr-2"></i>ChatGPT & AI Tools for Pharma</li>
+                            <li><i class="fas fa-check-circle text-purple-600 mr-2"></i>Data Privacy & AI Ethics</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <button onclick="openModal('modal-course-ai')" class="w-full bg-purple-50 text-purple-700 font-semibold py-2 rounded-lg hover:bg-purple-700 hover:text-white transition-colors border border-purple-200">View Full Syllabus</button>
+                    </div>
+                </div>
+                
+                <!-- Notice for other courses -->
+                <div class="md:col-span-2 lg:col-span-2 bg-gradient-to-r from-brand-blue to-blue-800 rounded-2xl shadow-md p-8 flex flex-col sm:flex-row items-center justify-between text-white border-l-4 border-brand-gold">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Explore More Programs</h3>
+                        <p class="text-blue-100 mb-4 sm:mb-0 max-w-lg">We also offer advanced certifications in Clinical Data Mgt, Digital Marketing, Pharma Mgt, Medical Coding, and Forex & Stock Markets.</p>
+                    </div>
+                    <a href="#contact" class="shrink-0 bg-brand-gold text-brand-dark px-6 py-3 rounded-lg font-bold hover:bg-yellow-400 transition-colors shadow-lg">Download Full Brochure</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Detail Modals (Hidden by default) -->
+    
+    <!-- Modal 1: PG Diploma -->
+    <div id="modal-course-1" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all">
+            <div class="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 flex justify-between items-center z-10">
+                <h3 class="text-xl font-bold text-brand-blue">Global PG Diploma in Clinical Research</h3>
+                <button onclick="closeModal('modal-course-1')" class="text-gray-400 hover:text-red-500 text-2xl focus:outline-none">&times;</button>
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <span class="font-semibold text-gray-700">Fee Structure:</span>
+                    <span class="text-2xl font-bold text-brand-blue">₹25,000</span>
+                </div>
+                <h4 class="font-bold text-lg mb-4 text-gray-800">Modules Covered:</h4>
+                <ul class="grid sm:grid-cols-2 gap-3 text-gray-600">
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> Clinical Trial Management (CTM)</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> Clinical Data Management (CDM)</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> Pharmacovigilance (PV)</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> Medical Writing</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> ICH-GCP Certification</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> AI in Pharma Clinical Research</li>
+                    <li class="flex items-start"><i class="fas fa-caret-right text-brand-gold mt-1 mr-2"></i> Medical Devices in Clinical Research</li>
+                </ul>
+                <div class="mt-8">
+                    <a href="#registration" onclick="closeModal('modal-course-1')" class="block w-full text-center bg-brand-blue text-white py-3 rounded-lg font-bold hover:bg-brand-lightBlue transition-colors shadow-md">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- (Other modals would follow same structure - omitting for brevity but Javascript will handle closing them) -->
+
+    <!-- STEP 4 - SERVICES PROVIDED -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-brand-blue mb-4">Our Services</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-gray-600">Comprehensive support for academics, research, and publications.</p>
+            </div>
+
+            <!-- Custom Tabs Setup -->
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Tab Navigation -->
+                <div class="md:w-1/3 flex flex-col gap-2">
+                    <button onclick="switchTab('tab-writing')" id="btn-tab-writing" class="text-left px-6 py-4 rounded-xl font-bold transition-all bg-brand-blue text-white shadow-md">
+                        <i class="fas fa-pen-nib mr-3"></i> Writing & Publication
+                    </button>
+                    <button onclick="switchTab('tab-research')" id="btn-tab-research" class="text-left px-6 py-4 rounded-xl font-bold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-microscope mr-3"></i> In-Vitro Research & Bioassay
+                    </button>
+                </div>
+
+                <!-- Tab Content area -->
+                <div class="md:w-2/3 bg-gray-50 p-8 rounded-2xl border border-gray-200 min-h-[400px]">
+                    
+                    <!-- Content: Writing -->
+                    <div id="tab-writing" class="block animate-fade-in">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Writing & Publication Services</h3>
+                        
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-1 mb-3 inline-block">Writing Services</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• Thesis & Dissertation</li>
+                                    <li>• Synopsis Preparation</li>
+                                    <li>• Review & Research Articles</li>
+                                    <li>• SOP & Technical Docs</li>
+                                    <li>• Medical & Scientific Writing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-1 mb-3 inline-block">Publication Support</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• Manuscript Formatting</li>
+                                    <li>• Journal Selection</li>
+                                    <li>• Plagiarism Reduction</li>
+                                    <li>• Peer Review Support</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-1 mb-3 inline-block">Book Publication</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• ISBN Book Publication</li>
+                                    <li>• Chapter Writing & Editing</li>
+                                    <li>• Cover Page Designing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-blue border-b-2 border-brand-gold pb-1 mb-3 inline-block">Patent & IP</h4>
+                                <ul class="space-y-1 text-sm text-gray-600">
+                                    <li>• Patent Writing & Filing</li>
+                                    <li>• Copyright & Trademark</li>
+                                    <li>• Innovation Documentation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content: Research -->
+                    <div id="tab-research" class="hidden animate-fade-in">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Specialized Research Testing Services</h3>
+                        
+                        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-dna mr-2 text-brand-gold"></i>Cell-Based & Cytotoxicity</h4>
+                                <p class="text-xs text-gray-500">In Vitro Cytotoxicity, Cell Viability, Scratch & Wound Healing Assay.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-shield-virus mr-2 text-brand-gold"></i>Immunology Studies</h4>
+                                <p class="text-xs text-gray-500">Anti-Inflammatory, Immuno-Modulatory, Anti-Arthritic Activity.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-heartbeat mr-2 text-brand-gold"></i>Metabolic Disorders</h4>
+                                <p class="text-xs text-gray-500">Anti-Diabetic, Hypoglycemic, Anti-Obesity Activity.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-brain mr-2 text-brand-gold"></i>Neuro & CNS Research</h4>
+                                <p class="text-xs text-gray-500">Neurotoxicity, Anti-Parkinson's, Anti-Alzheimer's Activity.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-bacteria mr-2 text-brand-gold"></i>Microbiology</h4>
+                                <p class="text-xs text-gray-500">Anti-Biofilm Activity, Antimicrobial Screening.</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-brand-blue text-sm mb-2"><i class="fas fa-spa mr-2 text-brand-gold"></i>Skin & Cosmetic</h4>
+                                <p class="text-xs text-gray-500">Anti-Aging, Cosmetic Bioactivity Evaluation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 5 - OPPORTUNITIES -->
+    <section id="opportunities" class="py-20 bg-brand-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-extrabold mb-4">Job & Career Opportunities</h2>
+                    <div class="w-24 h-1 bg-brand-gold rounded-full mb-4"></div>
+                    <p class="text-gray-400 max-w-xl">Find the perfect role. Filter through our latest openings spanning internships, fresher roles, and experienced positions.</p>
+                </div>
+                
+                <!-- Filters UI -->
+                <div class="mt-6 md:mt-0 flex flex-wrap gap-3">
+                    <select class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-gold focus:border-brand-gold block p-2.5">
+                        <option>All Types</option>
+                        <option>Full-Time</option>
+                        <option>Internship</option>
+                        <option>Fresher</option>
+                    </select>
+                    <select class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-brand-gold focus:border-brand-gold block p-2.5">
+                        <option>All Domains</option>
+                        <option>Clinical Research</option>
+                        <option>Pharmacovigilance</option>
+                        <option>IT & Data</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Job Board Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Job Card 1 -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-brand-gold/50 transition-colors group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="bg-blue-900/50 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-800">Fresher Opportunity</span>
+                            <h3 class="text-xl font-bold mt-2 group-hover:text-brand-gold transition-colors">Pharmacovigilance Trainee</h3>
+                            <p class="text-gray-400 text-sm mt-1"><i class="far fa-building mr-1"></i> Top Tier Pharma MNC</p>
+                        </div>
+                        <span class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Pune/Remote</span>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-6 line-clamp-2">Looking for B.Pharm/M.Pharm freshers with excellent communication skills and basic knowledge of ADR reporting.</p>
+                    <div class="flex justify-between items-center mt-auto border-t border-gray-700 pt-4">
+                        <span class="text-xs text-gray-500">Posted 2 days ago</span>
+                        <div class="space-x-3">
+                            <button class="text-sm font-medium text-gray-300 hover:text-white">View Details</button>
+                            <a href="#registration" class="bg-brand-gold text-brand-dark px-4 py-2 rounded-lg text-sm font-bold hover:bg-yellow-400">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-brand-gold/50 transition-colors group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="bg-green-900/50 text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-800">Experienced Role</span>
+                            <h3 class="text-xl font-bold mt-2 group-hover:text-brand-gold transition-colors">Clinical Data Manager</h3>
+                            <p class="text-gray-400 text-sm mt-1"><i class="far fa-building mr-1"></i> Global CRO</p>
+                        </div>
+                        <span class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Bangalore</span>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-6 line-clamp-2">Requires 3-5 years experience in CDM, proficiency in EDC tools, and strong understanding of CDISC standards.</p>
+                    <div class="flex justify-between items-center mt-auto border-t border-gray-700 pt-4">
+                        <span class="text-xs text-gray-500">Posted 1 week ago</span>
+                        <div class="space-x-3">
+                            <button class="text-sm font-medium text-gray-300 hover:text-white">View Details</button>
+                            <a href="#registration" class="bg-brand-gold text-brand-dark px-4 py-2 rounded-lg text-sm font-bold hover:bg-yellow-400">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark px-6 py-2.5 rounded-full font-semibold transition-colors">View All Opportunities (12+)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 6 - CANDIDATE REGISTRATION -->
+    <section id="registration" class="py-20 bg-gray-50 relative">
+        <div class="absolute inset-0 bg-brand-blue/5 pattern-dots" style="background-image: radial-gradient(#0f3a68 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                
+                <!-- Form Header -->
+                <div class="bg-brand-blue p-8 text-center text-white">
+                    <h2 class="text-3xl font-extrabold mb-2">Candidate Registration</h2>
+                    <p class="text-blue-200">Build Your Career With the Right Opportunities</p>
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <form id="registrationForm" onsubmit="handleRegistration(event)">
+                        
+                        <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-6"><i class="far fa-id-badge mr-2 text-brand-blue"></i> Personal Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                                <input type="email" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Mobile / WhatsApp Number *</label>
+                                <input type="tel" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Current Location *</label>
+                                <input type="text" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-gray-800 border-b pb-2 mb-6"><i class="fas fa-graduation-cap mr-2 text-brand-blue"></i> Professional Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Qualification & Specialization *</label>
+                                <input type="text" placeholder="e.g., B.Pharm, M.Sc Microbiology" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Graduation Year</label>
+                                    <input type="number" min="2010" max="2028" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Experience</label>
+                                    <select class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                                        <option>Fresher</option>
+                                        <option>1-3 Years</option>
+                                        <option>3+ Years</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Job Role / Area of Interest *</label>
+                                <input type="text" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Upload Resume (PDF/DOC, Max 5MB) *</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
+                                    <div class="space-y-1 text-center">
+                                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400"></i>
+                                        <div class="flex text-sm text-gray-600 justify-center">
+                                            <span class="relative cursor-pointer bg-white rounded-md font-medium text-brand-blue hover:text-brand-lightBlue focus-within:outline-none">
+                                                <span>Upload a file</span>
+                                                <input type="file" class="sr-only" accept=".pdf,.doc,.docx" required>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fee Structure Box -->
+                        <div class="bg-amber-50 border-2 border-brand-gold rounded-xl p-6 mb-8">
+                            <h3 class="text-lg font-bold text-brand-dark mb-4 flex items-center">
+                                <i class="fas fa-info-circle text-brand-gold mr-2 text-xl"></i> Consultancy Service Fee Structure
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-4">Total Service Fee: <strong>₹10,000</strong> (Payable in milestones)</p>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-gray-200">
+                                    <div class="flex items-center"><span class="w-6 h-6 rounded-full bg-brand-blue text-white text-xs flex items-center justify-center mr-3">1</span> Registration / Confirmation</div>
+                                    <span class="font-bold text-gray-800">₹500</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-gray-200">
+                                    <div class="flex items-center"><span class="w-6 h-6 rounded-full bg-brand-blue text-white text-xs flex items-center justify-center mr-3">2</span> After Successful Joining</div>
+                                    <span class="font-bold text-gray-800">₹4,500</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-white p-3 rounded shadow-sm border border-gray-200">
+                                    <div class="flex items-center"><span class="w-6 h-6 rounded-full bg-brand-blue text-white text-xs flex items-center justify-center mr-3">3</span> After Completion of 1 Month</div>
+                                    <span class="font-bold text-brand-blue">₹5,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- T&C and Consent -->
+                        <div class="mb-8 space-y-4">
+                            <label class="flex items-start">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-brand-blue rounded border-gray-300 focus:ring-brand-blue">
+                                <span class="ml-2 text-sm text-gray-600">I declare that the information provided is accurate and I agree to receive suitable career and recruitment opportunities from Peak Axis Global.</span>
+                            </label>
+                            <label class="flex items-start">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-brand-blue rounded border-gray-300 focus:ring-brand-blue" id="termsCheck">
+                                <span class="ml-2 text-sm text-gray-600">I accept the <a href="#" class="text-brand-blue underline" onclick="alert('Mock Terms: Registration fee is non-refundable. Subsequent fees are due only upon confirmed placement and completion of stated periods. Privacy policy applies.')">Terms & Conditions, Payment Terms, and Refund Policy</a>.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-brand-blue to-blue-800 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all text-lg">
+                            Register & Proceed to Payment (₹500)
+                        </button>
+                    </form>
+                    
+                    <!-- Success State (Hidden initially) -->
+                    <div id="registrationSuccess" class="hidden text-center py-10">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-check text-4xl text-green-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Registration Successful!</h3>
+                        <p class="text-gray-600 mb-6">Your unique Registration ID is:</p>
+                        <div class="bg-gray-100 py-3 px-6 rounded-lg inline-block text-xl font-mono font-bold text-brand-blue mb-8 border border-gray-300">
+                            PAG-CAN-2026-<span id="randId">0142</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6">Current Status: <span class="font-semibold text-brand-gold">Registered</span></p>
+                        <button onclick="location.reload()" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg font-medium hover:bg-gray-300 transition-colors">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 7 - CONTACT US -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-brand-blue mb-4">Contact Us</h2>
+                <div class="w-24 h-1 bg-brand-gold mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-gray-600">Have a Career or Business Requirement? Get in touch with our team.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-12">
+                
+                <!-- Contact Info & Quick Links (2 columns) -->
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="bg-slate-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">Get in Touch</h3>
+                        
+                        <div class="space-y-6">
+                            <a href="https://wa.me/1234567890" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-green-50 transition-colors group">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-500 font-medium">Chat on WhatsApp</p>
+                                    <p class="text-gray-900 font-bold">+91 98765 43210</p>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:info@peakaxisglobal.com" class="flex items-center p-3 rounded-lg hover:bg-blue-50 transition-colors group">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm text-gray-500 font-medium">Send an Email</p>
+                                    <p class="text-gray-900 font-bold">info@peakaxisglobal.com</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-brand-blue to-blue-900 p-8 rounded-2xl text-white shadow-lg text-center">
+                        <i class="fab fa-whatsapp text-5xl text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Join Our Community</h3>
+                        <p class="text-blue-200 text-sm mb-6">Get daily industry updates, interview prep materials, and career resources.</p>
+                        <button class="bg-white text-brand-blue font-bold py-2 px-6 rounded-full shadow hover:bg-gray-100 transition-colors w-full">Join WhatsApp Group</button>
+                    </div>
+                </div>
+
+                <!-- Contact Form (3 columns) -->
+                <div class="lg:col-span-3">
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 relative">
+                        <!-- Decorative top edge -->
+                        <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-gold to-yellow-300 rounded-t-3xl"></div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 mt-2">Send an Enquiry</h3>
+                        <form id="contactForm" onsubmit="handleContact(event)" class="space-y-5">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                                    <input type="text" required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none transition-shadow">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Mobile Number *</label>
+                                    <input type="tel" required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none transition-shadow">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                                    <input type="email" required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none transition-shadow">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">I am a... *</label>
+                                    <select required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none">
+                                        <option value="" disabled selected>Select User Type</option>
+                                        <option>Candidate / Student</option>
+                                        <option>Professional</option>
+                                        <option>Employer / Organization</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Subject / Area of Interest *</label>
+                                <input type="text" required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                                <textarea rows="4" required class="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-blue outline-none resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="bg-brand-blue text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-brand-lightBlue transition-colors focus:ring-4 focus:ring-blue-300">
+                                Submit Enquiry
+                            </button>
+                            <p id="contactSuccessMsg" class="hidden text-green-600 font-medium mt-2 text-sm">
+                                <i class="fas fa-check-circle mr-1"></i> Thank you! Enquiry ID: <span id="enqId" class="font-mono"></span>. We will get in touch soon.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-gray-300 pt-16 pb-8 border-t-4 border-brand-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl font-bold text-white italic border-2 border-white rounded-full w-10 h-10 flex items-center justify-center">R</span>
+                        <span class="text-xl font-extrabold text-white tracking-wide">PEAK AXIS</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Empowering People. Creating Opportunities. Building Successful Careers.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-brand-gold transition-colors">About Us</a></li>
+                        <li><a href="#training" class="hover:text-brand-gold transition-colors">Training Programs</a></li>
+                        <li><a href="#services" class="hover:text-brand-gold transition-colors">Services</a></li>
+                        <li><a href="#opportunities" class="hover:text-brand-gold transition-colors">Job Opportunities</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Candidate Registration</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Interview Preparation</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Industry Updates Blog</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Contact</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"></i> 123 Business Park, Professional District, City - 400001</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-3 text-brand-gold"></i> +91 98765 43210</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-3 text-brand-gold"></i> info@peakaxisglobal.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 Peak Axis Global Solutions Pvt Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts for Interactivity -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            if (event.target.classList.contains('bg-black')) {
+                event.target.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Tab Switching Logic for Services
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.getElementById('tab-writing').classList.add('hidden');
+            document.getElementById('tab-research').classList.add('hidden');
+            
+            // Reset button styles
+            document.getElementById('btn-tab-writing').className = 'text-left px-6 py-4 rounded-xl font-bold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200';
+            document.getElementById('btn-tab-research').className = 'text-left px-6 py-4 rounded-xl font-bold transition-all bg-gray-100 text-gray-600 hover:bg-gray-200';
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            // Highlight selected button
+            document.getElementById('btn-' + tabId).className = 'text-left px-6 py-4 rounded-xl font-bold transition-all bg-brand-blue text-white shadow-md';
+        }
+
+        // Form Handling (Mock Submissions)
+        function handleRegistration(e) {
+            e.preventDefault();
+            // Generate random ID
+            document.getElementById('randId').innerText = Math.floor(1000 + Math.random() * 9000);
+            
+            // Hide form, show success
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('registrationSuccess').classList.remove('hidden');
+            
+            // In a real app, this would route to a payment gateway (e.g., Razorpay/Stripe for ₹500)
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70');
+
+            setTimeout(() => {
+                document.getElementById('enqId').innerText = 'ENQ-' + Math.floor(1000 + Math.random() * 9000);
+                document.getElementById('contactSuccessMsg').classList.remove('hidden');
+                btn.innerText = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-70');
+                e.target.reset(); // Clear form
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('contactSuccessMsg').classList.add('hidden');
+                }, 5000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
